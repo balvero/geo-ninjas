@@ -8,7 +8,7 @@
             <router-link :to="{name: 'Signup'}">Sign Up</router-link>
           </li>
           <li>
-            <a href>Log In</a>
+            <router-link :to="{name: 'Login'}">Log In</router-link>
           </li>
           <li>
             <a @click="logout">Log Out</a>
@@ -32,7 +32,7 @@ export default {
         .auth()
         .signOut()
         .then(() => {
-          this.$router.push({ name: "Signup" });
+          this.$router.push({ name: "Login" });
         });
     }
   }
