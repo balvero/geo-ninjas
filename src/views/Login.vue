@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import firebase from "firebase";
 export default {
   name: "Login",
   data() {
@@ -30,7 +31,21 @@ export default {
   },
   methods: {
     login() {
-      console.log(this.email, this.password);
+      if (this.email && this.password) {
+        this.feedback = null;
+        firebase
+          .auth()
+          .signInWithEmailAndPassword(this.email, this.password)
+          .then(cred => {
+            console.log(cred.user);
+            this.$router.push({ name: "Home" });
+          })
+          .catch(err => {
+            this.feedback = err.message;
+          });
+      } else {
+        this.feedback = "Please fill in both fields";
+      }
     }
   }
 };
